@@ -1,0 +1,41 @@
+version: '3'
+
+dotenv: ['.env']
+
+tasks:
+  up:
+    dir: '{{.USER_WORKING_DIR}}'
+    preconditions:
+      - test -f docker-compose.yml
+    cmds:
+      - docker-compose up -d
+
+  down:
+    dir: '{{.USER_WORKING_DIR}}'
+    preconditions:
+      - test -f docker-compose.yml
+    cmds:
+      - docker-compose down
+
+  restart:
+    dir: '{{.USER_WORKING_DIR}}'
+    preconditions:
+      - test -f docker-compose.yml
+    cmds:
+      - docker-compose down
+      - docker-compose up -d
+
+  exec:
+    cmds:
+      - docker exec -it nagios /bin/bash 
+
+  build:
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - wget -O tmp/nagiosgraph-1.5.2.tar.gz http://downloads.sourceforge.net/project/nagiosgraph/nagiosgraph/1.5.2/nagiosgraph-1.5.2.tar.gz
+      - docker build . -t redbranch/nagios-container-image:${{ env.VERSION }} -t redbranch/nagios-container-image:latest .
+  push:
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - docker login -u redbranch
+      - docker push redbranch/nagios-container-image
