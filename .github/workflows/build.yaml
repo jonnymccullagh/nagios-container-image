@@ -30,5 +30,3 @@ jobs:
           fi
           docker build -t redbranch/nagios-container-image:${{ env.VERSION }} -t redbranch/nagios-container-image:latest .
           docker push redbranch/nagios-container-image:${{ env.VERSION }}
-
-ß
