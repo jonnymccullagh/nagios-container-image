@@ -20,7 +20,7 @@ RUN apt-get update && \
 
 COPY ./config/nagios/commands.cfg /etc/nagios4/objects/commands.cfg
 COPY ./config/nagios/contacts.cfg /etc/nagios4/objects/contacts.cfg
-COPY ./config/nagios/localhost.cfg /etc/nagios4/objects/conf.d/localhost.cfg
+COPY ./config/nagios/localhost.cfg /etc/nagios4/conf.d/localhost.cfg
 COPY ./config/nagios/extracommands.cfg /etc/nagios4/objects/extracommands.cfg
 COPY ./config/nagios/nagios.cfg /etc/nagios4/nagios.cfg
 COPY ./config/nagios/templates.cfg /etc/nagios4/templates.cfg
