@@ -25,8 +25,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          if [ ! -f tmp/nagiosgraph-$NAGIOSGRAPH_VERSION.tar.gz ]; then
-            wget -O tmp/nagiosgraph-$NAGIOSGRAPH_VERSION.tar.gz http://downloads.sourceforge.net/project/nagiosgraph/nagiosgraph/$NAGIOSGRAPH_VERSION/nagiosgraph-$NAGIOSGRAPH_VERSION.tar.gz
-          fi
+          mkdir tmp
+          wget -O tmp/nagiosgraph-$NAGIOSGRAPH_VERSION.tar.gz http://downloads.sourceforge.net/project/nagiosgraph/nagiosgraph/$NAGIOSGRAPH_VERSION/nagiosgraph-$NAGIOSGRAPH_VERSION.tar.gz
           docker build -t redbranch/nagios-container-image:${{ env.VERSION }} -t redbranch/nagios-container-image:latest .
           docker push redbranch/nagios-container-image:${{ env.VERSION }}
