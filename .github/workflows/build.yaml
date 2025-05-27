@@ -27,5 +27,5 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker build -t redbranch/nagios-container-image:${{ env.VERSION }} -t redbranch/nagios-container-image:latest .
-          docker push redbranch/nagios-container-image
+          docker push redbranch/nagios-container-image:${{ env.VERSION }}
 

@@ -3,6 +3,7 @@ version: '3'
 dotenv: ['.env']
 
 tasks:
+
   up:
     dir: '{{.USER_WORKING_DIR}}'
     preconditions:
@@ -31,11 +32,19 @@ tasks:
 
   build:
     dir: '{{.USER_WORKING_DIR}}'
-    cmds:
-      - wget -O tmp/nagiosgraph-1.5.2.tar.gz http://downloads.sourceforge.net/project/nagiosgraph/nagiosgraph/1.5.2/nagiosgraph-1.5.2.tar.gz
-      - docker build . -t redbranch/nagios-container-image:${{ env.VERSION }} -t redbranch/nagios-container-image:latest .
+    desc: "Build the container image"
+    env:
+      NAGIOSGRAPH_VERSION: 1.5.2
+      VERSION: 20250523001
+    cmds: 
+      - |
+        if [ ! -f tmp/nagiosgraph-$NAGIOSGRAPH_VERSION.tar.gz ]; then
+          wget -O tmp/nagiosgraph-$NAGIOSGRAPH_VERSION.tar.gz http://downloads.sourceforge.net/project/nagiosgraph/nagiosgraph/$NAGIOSGRAPH_VERSION/nagiosgraph-$NAGIOSGRAPH_VERSION.tar.gz
+        fi
+      - docker build -t redbranch/nagios-container-image:$VERSION -t redbranch/nagios-container-image:latest .
+  
   push:
     dir: '{{.USER_WORKING_DIR}}'
     cmds:
-      - docker login -u redbranch
+      - echo "$DOCKER_PASSWORD" | docker login -u redbranch --password-stdin
       - docker push redbranch/nagios-container-image

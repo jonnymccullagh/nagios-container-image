@@ -4,5 +4,4 @@ spool/nagiosgraph/*
 data/var_lib_nagios/*
 data/var_spool/*
 config/nagios/conf.d/*
-config/extraplugins/*
 tmp/*

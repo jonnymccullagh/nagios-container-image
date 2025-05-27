@@ -1,6 +1,6 @@
 services:
   nagios:
-    image: redbranch/nagios-container-image
+    image: redbranch/nagios-container-image:20250523001
     container_name: nagios
     ports:
       - 3009:80
