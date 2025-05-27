@@ -40,7 +40,6 @@ RUN mkdir -p /var/spool/nagios/checkresults
 RUN chown -R nagios:nagios /var/spool/nagios/checkresults
 RUN chown -R www-data:www-data /usr/lib/cgi-bin/nagiosgraph
 RUN cp -R /etc/nagios4/stylesheets /usr/share/nagios4/htdocs
-RUN rm /var/run/apache2/apache2.pid
 
 RUN /usr/sbin/nagios4 -v /etc/nagios4/nagios.cfg
 COPY entrypoint.sh /usr/local/bin
