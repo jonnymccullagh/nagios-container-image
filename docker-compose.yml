@@ -5,10 +5,10 @@ services:
     ports:
       - 3009:80
     volumes:
-      - ./conf/nagios/conf.d:/etc/nagios/conf.d
-      - ./data/var_spool/nagiosgraph:/var/spool/nagiosgraph
-      - ./data/var_spool/nagios/checkresults:/var/spool/nagios/checkresults
-      - ./data/var_lib_nagios/rw:/var/lib/nagios4/rw
+      - ./etc_nagios_conf_confd:/etc/nagios/conf.d
+      - ./data/var_spool_nagiosgraph:/var/spool/nagiosgraph
+      - ./data/var_spool_nagios_checkresults:/var/spool/nagios/checkresults
+      - ./data/var_lib_nagios_rw:/var/lib/nagios4/rw
     environment:
       - SLACK_HOSTNAME=${SLACK_HOSTNAME}
       - SLACK_BOTUSERNAME=${SLACK_BOTUSERNAME}
