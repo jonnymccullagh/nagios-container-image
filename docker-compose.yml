@@ -1,6 +1,6 @@
 services:
   nagios:
-    image: redbranch/nagios-container-image:20250523001
+    image: redbranch/nagios-container-image:20250523008
     container_name: nagios
     ports:
       - 3009:80
@@ -8,7 +8,7 @@ services:
       - ./etc_nagios_conf_confd:/etc/nagios/conf.d
       - ./data/var_spool_nagiosgraph:/var/spool/nagiosgraph
       - ./data/var_spool_nagios_checkresults:/var/spool/nagios/checkresults
-      - ./data/var_lib_nagios_rw:/var/lib/nagios4/rw
+      - nagios_rw:/var/lib/nagios4/rw
     environment:
       - SLACK_HOSTNAME=${SLACK_HOSTNAME}
       - SLACK_BOTUSERNAME=${SLACK_BOTUSERNAME}
@@ -20,3 +20,5 @@ services:
       - SMTP_USERNAME=${SMTP_USERNAME}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - SMTP_STARTTLS=${SMTP_STARTTLS}
+volumes:
+  nagios_rw:
